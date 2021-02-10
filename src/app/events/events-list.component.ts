@@ -3,6 +3,7 @@ import { EventService } from './shared/event.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { IEvent } from './shared';
 
 @Component({
   template: `
@@ -21,7 +22,7 @@ import { ActivatedRoute } from '@angular/router';
   `,
 })
 export class EventsListComponent implements OnInit {
-  events: Observable<any[]>;
+  events: IEvent[];
 
   constructor(
     private eventService: EventService,

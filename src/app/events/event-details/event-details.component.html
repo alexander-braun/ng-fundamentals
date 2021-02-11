@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="event">
   <img class="event-image" [src]="event?.imageUrl" [alt]="event?.name" />
 
   <div class="row">
@@ -11,7 +11,7 @@
     <div class="col-md-6">
       <div><strong>Date:</strong> {{ event?.date }}</div>
       <div><strong>Time:</strong> {{ event?.time }}</div>
-      <div><strong>Price:</strong> ${{ event?.price }}</div>
+      <div><strong>Price:</strong> $ {{ event?.price }}</div>
     </div>
     <div
       class="col-md-6"

@@ -15,8 +15,10 @@ import {
   CreateEventComponent,
   EventRouteActivator,
   EventListResolver,
+  CreateSessionComponent,
 } from './events/index';
 import { AuthService } from './user/auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,14 @@ import { AuthService } from './user/auth.service';
     EventDetailsComponent,
     CreateEventComponent,
     Error404Component,
+    CreateSessionComponent,
   ],
   imports: [
     BrowserModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [RouterModule],
   providers: [

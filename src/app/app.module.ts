@@ -21,7 +21,12 @@ import {
 } from './events/index';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CollapsibleWellComponent } from './common/collapsible-well.component';
+import {
+  CollapsibleWellComponent,
+  JQ_TOKEN,
+  SimpleModalComponent,
+  ModalTriggerDirective,
+} from './common';
 
 @NgModule({
   declarations: [
@@ -36,6 +41,8 @@ import { CollapsibleWellComponent } from './common/collapsible-well.component';
     SessionListComponent,
     CollapsibleWellComponent,
     DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective,
   ],
   imports: [
     BrowserModule,

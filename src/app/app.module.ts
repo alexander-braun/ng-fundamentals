@@ -18,12 +18,14 @@ import {
   CreateSessionComponent,
   SessionListComponent,
   DurationPipe,
+  UpvoteComponent,
+  VoterService,
+  LocationValidatorDirective,
 } from './events/index';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   CollapsibleWellComponent,
-  JQ_TOKEN,
   SimpleModalComponent,
   ModalTriggerDirective,
 } from './common';
@@ -43,6 +45,8 @@ import {
     DurationPipe,
     SimpleModalComponent,
     ModalTriggerDirective,
+    UpvoteComponent,
+    LocationValidatorDirective,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +59,7 @@ import {
   providers: [
     EventService,
     EventRouteActivator,
+    VoterService,
     AuthService,
     {
       provide: 'canDeactivateCreateEvent',

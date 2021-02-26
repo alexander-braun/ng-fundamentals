@@ -33,8 +33,8 @@ export class EventDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.event = this.eventService.getEvent(+params['id']);
+    this.route.data.subscribe((data) => {
+      this.event = data['event'];
       this.addMode = false;
     });
   }
@@ -46,7 +46,7 @@ export class EventDetailsComponent implements OnInit {
   saveNewSession(session: ISession) {
     session.id = this.event.sessions[this.event.sessions.length - 1].id + 1;
     this.event.sessions.push(session);
-    this.eventService.updateEventWithNewSession(this.event);
+    this.eventService.saveEvent(this.event).subscribe();
     this.addMode = false;
   }
 

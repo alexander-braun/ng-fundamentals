@@ -13,7 +13,6 @@ import {
   EventService,
   EventDetailsComponent,
   CreateEventComponent,
-  EventRouteActivator,
   EventListResolver,
   CreateSessionComponent,
   SessionListComponent,
@@ -21,6 +20,7 @@ import {
   UpvoteComponent,
   VoterService,
   LocationValidatorDirective,
+  EventResolver,
 } from './events/index';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -60,7 +60,6 @@ import { HttpClientModule } from '@angular/common/http';
   exports: [RouterModule],
   providers: [
     EventService,
-    EventRouteActivator,
     VoterService,
     AuthService,
     {
@@ -68,6 +67,7 @@ import { HttpClientModule } from '@angular/common/http';
       useValue: checkDirtyState,
     },
     EventListResolver,
+    EventResolver,
   ],
   bootstrap: [EventsAppComponent],
 })

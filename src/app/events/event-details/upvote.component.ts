@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'upvote',
@@ -9,7 +15,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
         <div class="votingButton">
           <i
             class="glyphicon"
-            [classList]="heartClass"
+            [ngClass]="heartClass"
             [style.color]="iconColor"
           ></i>
         </div>
@@ -20,19 +26,24 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     </div>
   `,
 })
-export class UpvoteComponent {
+export class UpvoteComponent implements OnChanges {
   @Input() count: number;
-  @Input() set voted(val) {
-    this.iconColor = val ? 'red' : 'white';
-    this.heartClass = val
-      ? 'glyphicon glyphicon-heart'
-      : 'glyphicon glyphicon-heart-empty';
-  }
+  @Input() voted: boolean;
   @Output() vote = new EventEmitter();
   iconColor: string;
   heartClass: string;
 
+  ngOnChanges() {
+    if (this.voted) {
+      this.iconColor = 'red';
+      this.heartClass = 'glyphicon glyphicon-heart';
+    } else {
+      this.iconColor = 'white';
+      this.heartClass = 'glyphicon glyphicon-heart-empty';
+    }
+  }
+
   onClick() {
-    this.vote.emit({});
+    this.vote.emit();
   }
 }

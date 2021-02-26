@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -16,47 +16,32 @@ export class EventService {
       .pipe(catchError(this.handleError<IEvent[]>('getEvents', [])));
   }
 
+  getEvent(id: number): Observable<IEvent> {
+    return this.http
+      .get<IEvent>('/api/events/' + id)
+      .pipe(catchError(this.handleError<IEvent>('getEvent')));
+  }
+
+  saveEvent(event: IEvent) {
+    const options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+    return this.http
+      .post<IEvent>('/api/events', event, options)
+      .pipe(catchError(this.handleError<IEvent>('saveEvent')));
+  }
+
+  searchSessions(term): Observable<ISession[]> {
+    return this.http
+      .get<ISession[]>('/api/sessions/search?search=' + term)
+      .pipe(catchError(this.handleError<ISession[]>('searchSession')));
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       return of(result as T);
     };
-  }
-
-  getEvent(id: number): IEvent {
-    return events.find((event) => event.id === id);
-  }
-
-  saveEvent(event) {
-    event.id = events[events.length - 1].id + 1;
-    event.session = [];
-    events.push(event);
-  }
-
-  updateEventWithNewSession(event) {
-    let index = events.findIndex((x) => (x.id = event.id));
-    events[index] = event;
-  }
-
-  searchSessions(term) {
-    term = term.toLowerCase();
-    let results: ISession[] = [];
-    events.forEach((event) => {
-      let matchingSessions = event.sessions.filter(
-        (session) => session.name.toLowerCase().indexOf(term) >= 0
-      );
-      matchingSessions = matchingSessions.map((session: any) => {
-        session.eventId = event.id;
-        return session;
-      });
-      results.push(...matchingSessions);
-    });
-    const emitter = new EventEmitter(true);
-    setTimeout(() => {
-      emitter.emit(results);
-    }, 100);
-
-    return emitter;
   }
 }
 

@@ -29,6 +29,7 @@ import {
   SimpleModalComponent,
   ModalTriggerDirective,
 } from './common';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import {
     RouterModule.forRoot(appRoutes),
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   exports: [RouterModule],
   providers: [
